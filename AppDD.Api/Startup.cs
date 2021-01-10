@@ -1,3 +1,5 @@
+using AppDD.Core.Interfaces;
+using AppDD.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +34,9 @@ namespace AppDD.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AppDD.Api", Version = "v1" });
             });
+
+            services.AddTransient<ICategoryRepository, CategoryMongoRepository>(); //Si el cliente quiere ahorrar unos pesitos y quiere cambiar de base de datos, solamente cambiamos el nombre del repositorio (Ej: CategoryMongoDbRepository())
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
